@@ -1,14 +1,59 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams, useOutletContext } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Item = () => {
-    const location = useLocation();
-    const item = location.state;
-    if (!item) return <h1> fetch item again with id here if manually typed in </h1>
+	const location = useLocation();
+	// const item = location.state;
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(true);
+    const [item, setItem] = useState(null);
+	const { id } = useParams();
+    const [cart, setCart] = useOutletContext();
+
+    function handleClick() {
+        if (!cart.includes(item)) {
+            setCart([...cart, item]);
+            console.log(cart)
+            return;
+        }
+        alert("Item already in cart");
+    }
+
+    if (location.state && item === null) {
+        setItem(location.state);
+        setLoading(false);
+    }
+
+	useEffect(() => {
+		if (!item) {
+			fetch(`https://fakestoreapi.com/products/${id}`, {
+				mode: "cors",
+			})
+				.then((response) => {
+					if (response.status >= 400) {
+						throw new Error("server error");
+					}
+					return response.json();
+				})
+				.then((response) => setItem(response))
+				.catch((error) => setError(error))
+				.finally(() => setLoading(false));
+		}
+	}, [item, id]);
+
+    if (error) return <p> A network error was encountered</p>;
+	if (loading) return <p> Loading... </p>;
+    
+
 	return (
 		<div className="item">
-			<h2> Item page</h2>
-            <h3> item = {item.description}</h3>
-            <img src={item.image} alt={item.description}/>
+            <img src={item.image} alt={item.description} />
+            <div className="itemInfo container">
+                <h2> {item.title}</h2>
+                <h3> {item.price}</h3>
+                <h4> item = {item.description}</h4>
+                <button onClick={handleClick}> Add to cart </button>
+            </div>
 		</div>
 	);
 };

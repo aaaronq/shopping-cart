@@ -6,6 +6,14 @@
 	padding: 0;
 }
 
+body {
+	height: 100%;
+}
+
+#root {
+	height: 100%;
+}
+
 header {
 	background-color: gainsboro;
 	padding: 20px;
@@ -40,6 +48,7 @@ li > .link:hover {
 }
 
 main {
+	height: 100%;
 	margin-top: 50px;
 }
 
@@ -68,4 +77,28 @@ main {
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
+}
+
+.item {
+	height: 100%;
+	margin-top: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 50px;
+}
+
+.item img {
+	border: 2px solid black;
+	width: 500px;
+}
+
+.itemInfo {
+	text-align: center;
+	width: 500px;
+	gap: 30px;
+}
+
+.itemInfo h4 {
+	width: 425px;
 }

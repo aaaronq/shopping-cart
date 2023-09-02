@@ -1,19 +1,15 @@
 import { useState } from "react";
 import "../App.css";
 import Header from "./Header";
-import { useOutlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 function App() {
-	const outlet = useOutlet();
+	const [cart, setCart] = useState([]);
 	return (
 		<>
-			<Header />
+			<Header cart={cart} />
       <main>
-			{outlet || (
-				<div className="welcome container">
-					<h1>Welcome to the shop!</h1>
-				</div>
-			)}
+			<Outlet context={[cart, setCart]}/>
       </main>
 		</>
 	);
