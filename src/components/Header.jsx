@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import cartIcon from "../img/cart.png"
 
 const Header = ({ cart }) => {
 	//header will keep cart state out of ease
@@ -38,7 +39,7 @@ const Header = ({ cart }) => {
 					<div id="redCircle">
 						<p> {cart.length} </p>
 					</div>
-					<img id="cartImg" src="../src/img/cart.png" alt="cart"/>
+					<img id="cartImg" src={cartIcon} alt="cart"/>
 				</div>
 			</Link>
 		</header>
