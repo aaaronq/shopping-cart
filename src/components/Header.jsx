@@ -5,7 +5,7 @@ const Header = ({ cart }) => {
 	//header will keep cart state out of ease
 	return (
 		<header>
-			<h1>
+			<h1 id="logo">
 				{" "}
 				<Link className="link" to="/">
 					Mall Grab
@@ -33,14 +33,14 @@ const Header = ({ cart }) => {
 					</Link>
 				</li>
 			</ul>
-			<div className="cart">
-				<p> {cart.length} </p>
-				<span>
-					<Link className="link" to="/cart">
-						Cart
-					</Link>
-				</span>
-			</div>
+			<Link id="cartLink" className="link" to="/cart">
+				<div id="cartIcon">
+					<div id="redCircle">
+						<p> {cart.length} </p>
+					</div>
+					<img id="cartImg" src="../src/img/cart.png" alt="cart"/>
+				</div>
+			</Link>
 		</header>
 	);
 };

@@ -1,9 +1,11 @@
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
+import CartItem from "./CartItem";
 
 const Cart = () => {
 	const [cart, setCart] = useOutletContext();
+	const navigate = useNavigate();
 	function handleClick() {
-		console.log("foo");
+		navigate("/checkout")
 	}
 	return (
 		<div className="cart container">
@@ -14,10 +16,12 @@ const Cart = () => {
 				</>
 			) : (
 				<>
+					<h1 id="cartHeading"> Your Cart </h1>
 					{cart.map((item) => 
-						<h1 key={item.id}> {item.title} </h1>
+						<CartItem key={item.id} item={item}/>
 					)}
-					<button onClick={handleClick}> Checkout </button>
+					<h3> Order total = £{cart.reduce((acc, cartItem) => acc += +cartItem.price, 0)}</h3>
+					<button id="checkoutBtn" onClick={handleClick}> Checkout </button>
 				</>
 			)}
 		</div>

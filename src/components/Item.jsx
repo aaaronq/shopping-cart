@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 const Item = () => {
 	const location = useLocation();
-	// const item = location.state;
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(true);
     const [item, setItem] = useState(null);
@@ -11,15 +10,14 @@ const Item = () => {
     const [cart, setCart] = useOutletContext();
 
     function handleClick() {
-        if (!cart.includes(item)) {
+        if (!cart.some((cartItem => cartItem.id === +id))){
             setCart([...cart, item]);
-            console.log(cart)
             return;
         }
         alert("Item already in cart");
     }
 
-    if (location.state && item === null) {
+    if (location.state && !item) {
         setItem(location.state);
         setLoading(false);
     }
@@ -50,9 +48,9 @@ const Item = () => {
             <img src={item.image} alt={item.description} />
             <div className="itemInfo container">
                 <h2> {item.title}</h2>
-                <h3> {item.price}</h3>
+                <h3> £{item.price}</h3>
                 <h4> item = {item.description}</h4>
-                <button onClick={handleClick}> Add to cart </button>
+                <button id="addBtn" onClick={handleClick}> Add to cart </button>
             </div>
 		</div>
 	);

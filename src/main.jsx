@@ -5,6 +5,7 @@ import Products from "./components/Products.jsx";
 import ErrorElement from "./components/ErrorElement.jsx";
 import Cart from "./components/Cart.jsx"
 import Item from "./components/Item.jsx"
+import Checkout from "./components/Checkout.jsx"
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div className="welcome container"><h1>Welcome to the shop!</h1></div>
+        element: <div className="welcome container"><div className="welcomeInfo"><h1>Welcome to the shop!</h1></div></div>
       },
       {
         path: "/mens",
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart/>
+      },
+      {
+        path:"/checkout",
+        element: <Checkout/>
       }
     ]
 	},
